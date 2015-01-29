@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Klenergy Data Server</title>
+        <script>
+
+		function GetArduinoIO()
+		{
+			nocache = "&nocache=" + Math.random() * 1000000;
+			var request = new XMLHttpRequest();
+			request.onreadystatechange = function()
+			{
+				if (this.readyState == 4) {
+					if (this.status == 200) {
+						if (this.responseXML != null) {
+							// XML file received - contains analog values, switch values and LED states
+							var count;
+							// get analog inputs
+							var num_an = this.responseXML.getElementsByTagName('data').length;
+							for (count = 0; count < num_an; count++) {
+								document.getElementsByClassName("data")[count].innerHTML =
+									this.responseXML.getElementsByTagName('data')[count].childNodes[0].nodeValue;
+							}
+						}
+					}
+				}
+			}
+			// send HTTP GET request with LEDs to switch on/off if any
+			request.open("GET", "ajax_inputs", true);
+			request.send(null);
+			setTimeout('GetArduinoIO()', 1000);
+
+		}
+	</script>
+	<style>
+
+		.IO_box {
+			float: left;
+			margin: 0 20px 20px 0;
+			border: 1px solid blue;
+			padding: 0 5px 0 5px;
+			width: 120px;
+		}
+		h1 {
+			font-size: 120%;
+			color: blue;
+			margin: 0 0 10px 0;
+		}
+		h2 {
+			font-size: 85%;
+			color: #5734E6;
+			margin: 5px 0 5px 0;
+		}
+		p, form, button {
+			font-size: 80%;
+			color: #252525;
+		}
+		.small_text {
+			font-size: 70%;
+			color: #737373;
+		}
+	</style>
+    </head>
+    <body onload="GetArduinoIO()">
+        <h1>Klenergy Data Server</h1>
+        <div class="IO_box">
+			<h2>Inputs</h2>
+			<p>O2 (l/min): <span class="data">...</span></p>
+			<p>P(W): <span class="data">...</span></p>
+			<p>N(%): <span class="data">...</span></p>
+			<p>Q (l/min): <span class="data">...</span></p>
+			<p>H2 (l/min): <span class="data">...</span></p>
+		</div>
+    </body>
+</html>

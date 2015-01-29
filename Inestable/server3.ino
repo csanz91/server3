@@ -40,6 +40,8 @@
 // size of buffer used to capture HTTP requests
 #define REQ_BUF_SZ   60
 
+#define NUM_DATA 5
+
 // MAC address from Ethernet shield sticker under board
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 IPAddress ip(192, 168, 1, 46); // IP address, may need to change depending on network
@@ -190,68 +192,15 @@ void sendFile(File webFile, EthernetClient client){
 //  and LED status
 void XML_response(EthernetClient cl)
 {
-    int analog_val;            // stores value read from analog inputs
-    int count;                 // used by 'for' loops
-    int sw_arr[] = {2, 3, 5};  // pins interfaced to switches
-    
+
     cl.print("<?xml version = \"1.0\" ?>");
     cl.print("<inputs>");
     // read analog inputs
-    for (count = 2; count <= 7; count++) { // A2 to A7
-        analog_val = analogRead(count);
-        cl.print("<analog>");
-        cl.print(analog_val);
-        cl.println("</analog>");
+    for (int i = 0; i < NUM_DATA; i++) {
+        cl.print("<data>");
+        cl.print(12345.67);
+        cl.println("</data>");
     }
-    // read switches
-    for (count = 0; count < 3; count++) {
-        cl.print("<switch>");
-        if (digitalRead(sw_arr[count])) {
-            cl.print("ON");
-        }
-        else {
-            cl.print("OFF");
-        }
-        cl.println("</switch>");
-    }
-    // checkbox LED states
-    // LED1
-    cl.print("<LED>");
-    if (LED_state[0]) {
-        cl.print("checked");
-    }
-    else {
-        cl.print("unchecked");
-    }
-    cl.println("</LED>");
-    // LED2
-    cl.print("<LED>");
-    if (LED_state[1]) {
-        cl.print("checked");
-    }
-    else {
-        cl.print("unchecked");
-    }
-     cl.println("</LED>");
-    // button LED states
-    // LED3
-    cl.print("<LED>");
-    if (LED_state[2]) {
-        cl.print("on");
-    }
-    else {
-        cl.print("off");
-    }
-    cl.println("</LED>");
-    // LED4
-    cl.print("<LED>");
-    if (LED_state[3]) {
-        cl.print("on");
-    }
-    else {
-        cl.print("off");
-    }
-    cl.println("</LED>");
     
     cl.print("</inputs>");
 }

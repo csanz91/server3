@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Arduino Ajax I/O</title>
+        <title>Klenergy Data Server</title>
         <script>
 
 		function GetArduinoIO()
@@ -33,9 +33,7 @@
 		}
 	</script>
 	<style>
-		html, body {
-  			background: url(/back.jpg);
-		}
+
 		.IO_box {
 			float: left;
 			margin: 0 20px 20px 0;
@@ -64,15 +62,15 @@
 	</style>
     </head>
     <body onload="GetArduinoIO()">
-        <h1>Arduino Ajax I/O</h1>
+        <h1>Klenergy Data Server</h1>
         <div class="IO_box">
 			<h2>Analog Inputs</h2>
-			<p>O2 (l/min): <span class="analog">...</span></p>
-			<p>P(W): <span class="analog">...</span></p>
-			<p>N(%): <span class="analog">...</span></p>
-			<p>Q (l/min): <span class="analog">...</span></p>
-			<p>H2 (l/min): <span class="analog">...</span></p>
-			<p>Ta(C): <span class="analog">...</span></p>
+			<p>O2 (l/min): <span class="data">...</span></p>
+			<p>P(W): <span class="data">...</span></p>
+			<p>N(%): <span class="data">...</span></p>
+			<p>Q (l/min): <span class="data">...</span></p>
+			<p>H2 (l/min): <span class="data">...</span></p>
+			<p>Ta(C): <span class="data">...</span></p>
 		</div>
     </body>
 </html>

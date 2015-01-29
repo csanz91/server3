@@ -27,7 +27,7 @@
 			}
 			// send HTTP GET request with LEDs to switch on/off if any
 			//request.open("GET", "ajax_inputs" + strLED1 + strLED2 + strLED3 + strLED4 + nocache, true);
-			request.send(null);
+			//request.send(null);
 			setTimeout('GetArduinoIO()', 1000);
 
 		}
@@ -64,7 +64,7 @@
     <body onload="GetArduinoIO()">
         <h1>Klenergy Data Server</h1>
         <div class="IO_box">
-			<h2>Analog Inputs</h2>
+			<h2>Inputs</h2>
 			<p>O2 (l/min): <span class="data">...</span></p>
 			<p>P(W): <span class="data">...</span></p>
 			<p>N(%): <span class="data">...</span></p>

@@ -26,8 +26,8 @@
 				}
 			}
 			// send HTTP GET request with LEDs to switch on/off if any
-			//request.open("GET", "ajax_inputs" + strLED1 + strLED2 + strLED3 + strLED4 + nocache, true);
-			//request.send(null);
+			request.open("GET", "ajax_inputs", true);
+			request.send(null);
 			setTimeout('GetArduinoIO()', 1000);
 
 		}

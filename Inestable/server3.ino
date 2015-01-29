@@ -81,15 +81,6 @@ void setup()
         return;  // can't find index file
     }
     Serial.println("SUCCESS - Found background file.");
-    // switches on pins 2, 3 and 5
-    pinMode(2, INPUT);
-    pinMode(3, INPUT);
-    pinMode(5, INPUT);
-    // LEDs
-    pinMode(6, OUTPUT);
-    pinMode(7, OUTPUT);
-    pinMode(8, OUTPUT);
-    pinMode(9, OUTPUT);
     
     Ethernet.begin(mac, ip);  // initialize Ethernet device
     server.begin();           // start to listen for clients
@@ -124,7 +115,7 @@ void loop()
                         client.println("Content-Type: text/xml");
                         client.println("Connection: keep-alive");
                         client.println();
-                        SetLEDs();
+                        //SetLEDs();
                         // send XML file containing input states
                         XML_response(client);
                     }else if(StrContains(HTTP_req, "back")){
@@ -194,47 +185,6 @@ void sendFile(File webFile, EthernetClient client){
 	
 }
 
-// checks if received HTTP request is switching on/off LEDs
-// also saves the state of the LEDs
-void SetLEDs(void)
-{
-    // LED 1 (pin 6)
-    if (StrContains(HTTP_req, "LED1=1")) {
-        LED_state[0] = 1;  // save LED state
-        digitalWrite(6, HIGH);
-    }
-    else if (StrContains(HTTP_req, "LED1=0")) {
-        LED_state[0] = 0;  // save LED state
-        digitalWrite(6, LOW);
-    }
-    // LED 2 (pin 7)
-    if (StrContains(HTTP_req, "LED2=1")) {
-        LED_state[1] = 1;  // save LED state
-        digitalWrite(7, HIGH);
-    }
-    else if (StrContains(HTTP_req, "LED2=0")) {
-        LED_state[1] = 0;  // save LED state
-        digitalWrite(7, LOW);
-    }
-    // LED 3 (pin 8)
-    if (StrContains(HTTP_req, "LED3=1")) {
-        LED_state[2] = 1;  // save LED state
-        digitalWrite(8, HIGH);
-    }
-    else if (StrContains(HTTP_req, "LED3=0")) {
-        LED_state[2] = 0;  // save LED state
-        digitalWrite(8, LOW);
-    }
-    // LED 4 (pin 9)
-    if (StrContains(HTTP_req, "LED4=1")) {
-        LED_state[3] = 1;  // save LED state
-        digitalWrite(9, HIGH);
-    }
-    else if (StrContains(HTTP_req, "LED4=0")) {
-        LED_state[3] = 0;  // save LED state
-        digitalWrite(9, LOW);
-    }
-}
 
 // send the XML file with analog values, switch status
 //  and LED status

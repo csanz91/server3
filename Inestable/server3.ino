@@ -138,7 +138,7 @@ void loop()
                         client.println("Content-Type: image/jpeg");
                         client.println();
                         webFile = SD.open("back.jpg");
-                    	sendFile(webFile, client);
+                    	//sendFile(webFile, client);
                         
                     }
                     else {  // web page request
